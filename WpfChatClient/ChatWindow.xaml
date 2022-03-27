@@ -1,0 +1,123 @@
+﻿<Window x:Class="WpfChatClient.ChatWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfChatClient"
+        mc:Ignorable="d"
+        Title="ChatWindow" Height="720" Width="1024" WindowStartupLocation="CenterScreen">
+    <Grid Margin="-1,0,0,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!--Sidebar column-->
+        <ScrollViewer Grid.Column="0" Padding="0 20 0 20" VerticalScrollBarVisibility="Hidden" Background="#FF0A0515">
+            <StackPanel>
+                <Border Padding="20 5 20 5">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        
+                        <Ellipse Grid.Column="0" Height="60" Width="60" HorizontalAlignment="Left">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="images\avatar1.jpg" Stretch="UniformToFill"/>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <Grid Grid.Column="1" Margin="5 0 5 0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Content="Username" VerticalAlignment="Bottom" Foreground="White" FontSize="14" />
+                            <Label Grid.Row="1" Content="Description" VerticalAlignment="Top" Foreground="#606060" />
+                        </Grid>
+                    </Grid>
+                </Border>
+                <Border Padding="20 5 20 5">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Ellipse Grid.Column="0" Height="60" Width="60" HorizontalAlignment="Left">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="images\avatar1.jpg" Stretch="UniformToFill"/>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <Grid Grid.Column="1" Margin="5 0 5 0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Content="Username" VerticalAlignment="Bottom" Foreground="White" FontSize="14" />
+                            <Label Grid.Row="1" Content="Description" VerticalAlignment="Top" Foreground="#606060" />
+                        </Grid>
+                    </Grid>
+                </Border>
+                <Border Padding="20 5 20 5">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Ellipse Grid.Column="0" Height="60" Width="60" HorizontalAlignment="Left">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="images\avatar1.jpg" Stretch="UniformToFill"/>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <Grid Grid.Column="1" Margin="5 0 5 0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Content="Username" VerticalAlignment="Bottom" Foreground="White" FontSize="14" />
+                            <Label Grid.Row="1" Content="Description" VerticalAlignment="Top" Foreground="#606060" />
+                        </Grid>
+                    </Grid>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!--Chat column-->
+        <Border Grid.Column="1" Padding="20" Background="Black" >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="60" />
+                </Grid.RowDefinitions>
+
+                <!--Messages box-->
+                <ScrollViewer x:Name="MessageListViewer" Grid.Row="0" VerticalScrollBarVisibility="Hidden">
+                    <StackPanel x:Name="MessageList" VerticalAlignment="Stretch" />
+                </ScrollViewer>
+                <!--Chat input/output-->
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox KeyDown="input_message_KeyDown" Padding="20 0 100 0" BorderThickness="0" VerticalContentAlignment="Center" Grid.Column="0" x:Name="input_message" TextWrapping="NoWrap" Height="40" Background="#FF303030" Foreground="White" FontWeight="Normal" FontSize="16">
+                        <TextBox.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="20"/>
+                            </Style>
+                        </TextBox.Resources>
+                    </TextBox>
+                    <Button Style="{StaticResource MyButtonStyle}" Grid.Column="1" Height="25" Background="#00000000" Margin="-130,0,0,0" Cursor="Hand">
+                        <Image Source="images\attach.png"/>
+                    </Button>
+                    <Button Style="{StaticResource MyButtonStyle}" Grid.Column="1" x:Name="btn_sendMessage" Click="btn_sendMessage_Click" Height="25" Background="#00000000" Margin="-60,0,0,0" Cursor="Hand">
+                        <Image Source="images\send.png"/>
+                    </Button>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
