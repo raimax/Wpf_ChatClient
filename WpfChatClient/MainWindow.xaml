@@ -13,9 +13,9 @@
 
         <StackPanel Grid.ColumnSpan="2" Width="250" VerticalAlignment="Center">
             <TextBlock Text="Connect to chat server" TextAlignment="Center" FontWeight="Normal" FontSize="22" Margin="0,0,0,20" />
-            <TextBox Margin="0,0,0,10" VerticalContentAlignment="Center" Height="30" Text="127.0.0.1" TextAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
-            <TextBox Margin="0,0,0,10" VerticalContentAlignment="Center" Height="30" Text="6666" TextAlignment="Center" />
-            <TextBox Margin="0,0,0,20" VerticalContentAlignment="Center" Height="30" Text="user1" TextAlignment="Center" />
+            <TextBox x:Name="Input_IpAddress" Margin="0,0,0,10" VerticalContentAlignment="Center" Height="30" Text="127.0.0.1" TextAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+            <TextBox x:Name="Input_Port" Margin="0,0,0,10" VerticalContentAlignment="Center" Height="30" Text="6666" TextAlignment="Center" />
+            <TextBox x:Name="Input_Username" Margin="0,0,0,20" VerticalContentAlignment="Center" Height="30" Text="user1" TextAlignment="Center" />
             <Button x:Name="btn_connect" Content="Connect" BorderThickness="0" HorizontalAlignment="Left" VerticalAlignment="Top" Click="btn_connect_Click" Width="250" Height="30" Background="#FF006ACC" Cursor="Hand" Foreground="White" FontWeight="Bold" />
         </StackPanel>
 

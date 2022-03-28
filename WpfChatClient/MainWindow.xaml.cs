@@ -22,7 +22,8 @@ namespace WpfChatClient
             try
             {
                 Client client = new Client();
-                await client.Connect("127.0.0.1", 6666);
+                client.Username = Input_Username.Text;
+                await client.Connect(Input_IpAddress.Text, int.Parse(Input_Port.Text));
 
                 WindowHelper.ChangeWindow(this, new ChatWindow(client));
             }

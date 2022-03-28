@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfChatClient"
         mc:Ignorable="d"
-        Title="ChatWindow" Height="720" Width="1024" WindowStartupLocation="CenterScreen">
+        Title="ChatWindow" Height="720" Width="1024" WindowStartupLocation="CenterScreen"
+        Closing="Window_Closing"
+        Closed="Window_Closed">
     <Grid Margin="-1,0,0,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300" />
