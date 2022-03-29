@@ -35,5 +35,18 @@ namespace WpfChatClient
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            Environment.Exit(0);
+        }
+
+        private void btn_connect_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Enter)
+            {
+                btn_connect_Click(sender, e);
+            }
+        }
     }
 }

@@ -15,76 +15,91 @@
         </Grid.ColumnDefinitions>
 
         <!--Sidebar column-->
-        <ScrollViewer Grid.Column="0" Padding="0 20 0 20" VerticalScrollBarVisibility="Hidden" Background="#FF0A0515">
-            <StackPanel>
-                <Border Padding="20 5 20 5">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        
-                        <Ellipse Grid.Column="0" Height="60" Width="60" HorizontalAlignment="Left">
-                            <Ellipse.Fill>
-                                <ImageBrush ImageSource="images\avatar1.jpg" Stretch="UniformToFill"/>
-                            </Ellipse.Fill>
-                        </Ellipse>
-                        <Grid Grid.Column="1" Margin="5 0 5 0">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <Label Grid.Row="0" Content="Username" VerticalAlignment="Bottom" Foreground="White" FontSize="14" />
-                            <Label Grid.Row="1" Content="Description" VerticalAlignment="Top" Foreground="#606060" />
-                        </Grid>
-                    </Grid>
-                </Border>
-                <Border Padding="20 5 20 5">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" Background="#FF0A0515">
+            <Grid Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+                
+                <Label Grid.Column="0" Content="Chatting as: " Foreground="Gray" VerticalAlignment="Center" />
+                <Label x:Name="Label_Username" Grid.Column="1" Content="username" Foreground="White" VerticalAlignment="Center" FontWeight="Normal" FontSize="14" />
+                <Button x:Name="Btn_Exit" Click="Btn_Exit_Click" Grid.Column="2" Style="{StaticResource MyButtonStyle}" Height="25" Background="#00000000" Cursor="Hand" HorizontalAlignment="Right">
+                    <Image Source="images\exit.png"/>
+                </Button>
+            </Grid>
+            <ScrollViewer Padding="0 20 0 20" VerticalScrollBarVisibility="Hidden" >
+                <StackPanel>
+                    <Border Padding="20 5 20 5">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
 
-                        <Ellipse Grid.Column="0" Height="60" Width="60" HorizontalAlignment="Left">
-                            <Ellipse.Fill>
-                                <ImageBrush ImageSource="images\avatar1.jpg" Stretch="UniformToFill"/>
-                            </Ellipse.Fill>
-                        </Ellipse>
-                        <Grid Grid.Column="1" Margin="5 0 5 0">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <Label Grid.Row="0" Content="Username" VerticalAlignment="Bottom" Foreground="White" FontSize="14" />
-                            <Label Grid.Row="1" Content="Description" VerticalAlignment="Top" Foreground="#606060" />
+                            <Ellipse Grid.Column="0" Height="60" Width="60" HorizontalAlignment="Left">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="images\avatar1.jpg" Stretch="UniformToFill"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <Grid Grid.Column="1" Margin="5 0 5 0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Label Grid.Row="0" Content="Username" VerticalAlignment="Bottom" Foreground="White" FontSize="14" />
+                                <Label Grid.Row="1" Content="Description" VerticalAlignment="Top" Foreground="#606060" />
+                            </Grid>
                         </Grid>
-                    </Grid>
-                </Border>
-                <Border Padding="20 5 20 5">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
+                    </Border>
+                    <Border Padding="20 5 20 5">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
 
-                        <Ellipse Grid.Column="0" Height="60" Width="60" HorizontalAlignment="Left">
-                            <Ellipse.Fill>
-                                <ImageBrush ImageSource="images\avatar1.jpg" Stretch="UniformToFill"/>
-                            </Ellipse.Fill>
-                        </Ellipse>
-                        <Grid Grid.Column="1" Margin="5 0 5 0">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <Label Grid.Row="0" Content="Username" VerticalAlignment="Bottom" Foreground="White" FontSize="14" />
-                            <Label Grid.Row="1" Content="Description" VerticalAlignment="Top" Foreground="#606060" />
+                            <Ellipse Grid.Column="0" Height="60" Width="60" HorizontalAlignment="Left">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="images\avatar1.jpg" Stretch="UniformToFill"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <Grid Grid.Column="1" Margin="5 0 5 0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Label Grid.Row="0" Content="Username" VerticalAlignment="Bottom" Foreground="White" FontSize="14" />
+                                <Label Grid.Row="1" Content="Description" VerticalAlignment="Top" Foreground="#606060" />
+                            </Grid>
                         </Grid>
-                    </Grid>
-                </Border>
-            </StackPanel>
-        </ScrollViewer>
+                    </Border>
+                    <Border Padding="20 5 20 5">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Ellipse Grid.Column="0" Height="60" Width="60" HorizontalAlignment="Left">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="images\avatar1.jpg" Stretch="UniformToFill"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <Grid Grid.Column="1" Margin="5 0 5 0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Label Grid.Row="0" Content="Username" VerticalAlignment="Bottom" Foreground="White" FontSize="14" />
+                                <Label Grid.Row="1" Content="Description" VerticalAlignment="Top" Foreground="#606060" />
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
+        </StackPanel>
 
         <!--Chat column-->
         <Border Grid.Column="1" Padding="20" Background="Black" >

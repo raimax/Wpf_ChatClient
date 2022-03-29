@@ -22,7 +22,8 @@ namespace WpfChatClient
         {
             try
             {
-                Message message2 = new Message() { Data = message };
+                Message message2 = new Message();
+                message2.Data.Add(message);
                 byte[] replyMessage = Serializer.Serialize(message2);
 
                 await _stream.WriteAsync(replyMessage, 0, replyMessage.Length);
@@ -33,7 +34,7 @@ namespace WpfChatClient
             }
         }
 
-        public void Listen(Action<string> onMessegedReveived)
+        public void Listen(Action<string> onMessegedReveived, Action<string> onInfoRecveived)
         {
             byte[] bytes = new byte[1024];
             Message message;
@@ -45,16 +46,29 @@ namespace WpfChatClient
                 {
                     message = Serializer.Deserialize(bytes);
 
-                    Application.Current.Dispatcher.Invoke(delegate
+                    if (message.Type == Message.MessageType.Message)
                     {
-                        onMessegedReveived(message.Data);
-                    });
+                        Application.Current.Dispatcher.Invoke(delegate
+                        {
+                            onMessegedReveived(message.Data[0]);
+                        });
+                    }
+                    else if (message.Type == Message.MessageType.UserList)
+                    {
 
+                    }
+                    else if (message.Type == Message.MessageType.Info)
+                    {
+                        Application.Current.Dispatcher.Invoke(delegate
+                        {
+                            onInfoRecveived(message.Data[0]);
+                        });
+                    }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Console.WriteLine("Error in Listen: " + ex.Message);
+                Console.WriteLine("Server closed");
                 Close();
             }
         }
@@ -62,7 +76,7 @@ namespace WpfChatClient
         public void Close()
         {
             Console.WriteLine("Closing client");
-            _stream.Close();
+            _client.Client.Close();
             _client.Close();
         }
     }

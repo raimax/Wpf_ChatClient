@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfChatClient"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="400" WindowStartupLocation="CenterScreen">
+        Title="MainWindow" Height="450" Width="400" WindowStartupLocation="CenterScreen"
+        Closed="Window_Closed">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -16,7 +17,7 @@
             <TextBox x:Name="Input_IpAddress" Margin="0,0,0,10" VerticalContentAlignment="Center" Height="30" Text="127.0.0.1" TextAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
             <TextBox x:Name="Input_Port" Margin="0,0,0,10" VerticalContentAlignment="Center" Height="30" Text="6666" TextAlignment="Center" />
             <TextBox x:Name="Input_Username" Margin="0,0,0,20" VerticalContentAlignment="Center" Height="30" Text="user1" TextAlignment="Center" />
-            <Button x:Name="btn_connect" Content="Connect" BorderThickness="0" HorizontalAlignment="Left" VerticalAlignment="Top" Click="btn_connect_Click" Width="250" Height="30" Background="#FF006ACC" Cursor="Hand" Foreground="White" FontWeight="Bold" />
+            <Button x:Name="btn_connect" KeyDown="btn_connect_KeyDown" Content="Connect" BorderThickness="0" HorizontalAlignment="Left" VerticalAlignment="Top" Click="btn_connect_Click" Width="250" Height="30" Background="#FF006ACC" Cursor="Hand" Foreground="White" FontWeight="Bold" />
         </StackPanel>
 
     </Grid>

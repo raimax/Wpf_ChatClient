@@ -18,10 +18,11 @@ namespace WpfChatClient
         {
             InitializeComponent();
             _client = client;
+            Label_Username.Content = client.Username;
 
             Task.Run(() =>
             {
-                _client.Listen(AddServerMessageToList);
+                _client.Listen(AddServerMessageToList, AddServerInfoMessageToList);
             });
         }
 
@@ -85,10 +86,10 @@ namespace WpfChatClient
         {
             TextBlock textBlock = new TextBlock();
             textBlock.Padding = new Thickness(3);
-            textBlock.FontSize = 12;
+            textBlock.FontSize = 13;
             textBlock.Text = message;
             textBlock.TextWrapping = TextWrapping.Wrap;
-            textBlock.Foreground = ColorHelper.GetColor("#606060");
+            textBlock.Foreground = ColorHelper.GetColor("#808080");
             textBlock.HorizontalAlignment = HorizontalAlignment.Center;
 
             return textBlock;
@@ -110,6 +111,13 @@ namespace WpfChatClient
         private void Window_Closed(object sender, EventArgs e)
         {
             Environment.Exit(0);
+        }
+
+        private void Btn_Exit_Click(object sender, RoutedEventArgs e)
+        {
+            _client.Close();
+
+            WindowHelper.ChangeWindow(this, new MainWindow());
         }
     }
 }
