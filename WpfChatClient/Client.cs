@@ -76,7 +76,7 @@ namespace WpfChatClient
             Action<List<string>> onUsersListReceived,
             Action<string> onFileNameReceived)
         {
-            byte[] bytes = new byte[1024];
+            byte[] bytes = new byte[1024 * 1024];
             Message message;
             int count;
 
@@ -116,27 +116,30 @@ namespace WpfChatClient
                     }
                     else if (message.Type == Message.MessageType.ReceiveFile)
                     {
-                        Application.Current.Dispatcher.Invoke(delegate
-                        {
-                            SaveFileDialog saveFileDialog = new SaveFileDialog();
-                            saveFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
-                            saveFileDialog.FilterIndex = 2;
-                            saveFileDialog.DefaultExt = message.Data[0].Split('.').Last();
-
-                            if (saveFileDialog.ShowDialog() == true)
-                            {
-                                if (saveFileDialog.FileName != "")
-                                {
-                                    File.WriteAllBytes(saveFileDialog.FileName, message.File);
-                                }
-                            }
-                        });
+                        SaveFileToDisk(message);
                     }
                 }
             }
             catch (Exception)
             {
                 Close();
+            }
+        }
+
+        private void SaveFileToDisk(Message message)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            saveFileDialog.FilterIndex = 2;
+            saveFileDialog.FileName = message.Data[0];
+            saveFileDialog.DefaultExt = message.Data[0].Split('.').Last();
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                if (saveFileDialog.FileName != "")
+                {
+                    File.WriteAllBytes(saveFileDialog.FileName, message.File);
+                }
             }
         }
 
