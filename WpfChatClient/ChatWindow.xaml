@@ -30,73 +30,8 @@
                 </Button>
             </Grid>
             <ScrollViewer Padding="0 20 0 20" VerticalScrollBarVisibility="Hidden" >
-                <StackPanel>
-                    <Border Padding="20 5 20 5">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-
-                            <Ellipse Grid.Column="0" Height="60" Width="60" HorizontalAlignment="Left">
-                                <Ellipse.Fill>
-                                    <ImageBrush ImageSource="images\avatar1.jpg" Stretch="UniformToFill"/>
-                                </Ellipse.Fill>
-                            </Ellipse>
-                            <Grid Grid.Column="1" Margin="5 0 5 0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
-                                <Label Grid.Row="0" Content="Username" VerticalAlignment="Bottom" Foreground="White" FontSize="14" />
-                                <Label Grid.Row="1" Content="Description" VerticalAlignment="Top" Foreground="#606060" />
-                            </Grid>
-                        </Grid>
-                    </Border>
-                    <Border Padding="20 5 20 5">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-
-                            <Ellipse Grid.Column="0" Height="60" Width="60" HorizontalAlignment="Left">
-                                <Ellipse.Fill>
-                                    <ImageBrush ImageSource="images\avatar1.jpg" Stretch="UniformToFill"/>
-                                </Ellipse.Fill>
-                            </Ellipse>
-                            <Grid Grid.Column="1" Margin="5 0 5 0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
-                                <Label Grid.Row="0" Content="Username" VerticalAlignment="Bottom" Foreground="White" FontSize="14" />
-                                <Label Grid.Row="1" Content="Description" VerticalAlignment="Top" Foreground="#606060" />
-                            </Grid>
-                        </Grid>
-                    </Border>
-                    <Border Padding="20 5 20 5">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-
-                            <Ellipse Grid.Column="0" Height="60" Width="60" HorizontalAlignment="Left">
-                                <Ellipse.Fill>
-                                    <ImageBrush ImageSource="images\avatar1.jpg" Stretch="UniformToFill"/>
-                                </Ellipse.Fill>
-                            </Ellipse>
-                            <Grid Grid.Column="1" Margin="5 0 5 0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
-                                <Label Grid.Row="0" Content="Username" VerticalAlignment="Bottom" Foreground="White" FontSize="14" />
-                                <Label Grid.Row="1" Content="Description" VerticalAlignment="Top" Foreground="#606060" />
-                            </Grid>
-                        </Grid>
-                    </Border>
+                <StackPanel x:Name="OnlineUsersList">
+                    
                 </StackPanel>
             </ScrollViewer>
         </StackPanel>

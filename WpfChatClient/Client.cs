@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 using System.Windows;
@@ -34,7 +35,7 @@ namespace WpfChatClient
             }
         }
 
-        public void Listen(Action<string> onMessegedReveived, Action<string> onInfoRecveived)
+        public void Listen(Action<string> onMessegedReveived, Action<string> onInfoRecveived, Action<List<string>> onUsersListReceived)
         {
             byte[] bytes = new byte[1024];
             Message message;
@@ -55,7 +56,10 @@ namespace WpfChatClient
                     }
                     else if (message.Type == Message.MessageType.UserList)
                     {
-
+                        Application.Current.Dispatcher.Invoke(delegate
+                        {
+                            onUsersListReceived(message.Data);
+                        });
                     }
                     else if (message.Type == Message.MessageType.Info)
                     {
@@ -68,7 +72,6 @@ namespace WpfChatClient
             }
             catch (Exception)
             {
-                Console.WriteLine("Server closed");
                 Close();
             }
         }

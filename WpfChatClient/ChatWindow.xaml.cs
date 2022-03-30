@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 
 namespace WpfChatClient
 {
@@ -22,7 +25,7 @@ namespace WpfChatClient
 
             Task.Run(() =>
             {
-                _client.Listen(AddServerMessageToList, AddServerInfoMessageToList);
+                _client.Listen(AddServerMessageToList, AddServerInfoMessageToList, AddOnlineUserToList);
             });
         }
 
@@ -62,6 +65,17 @@ namespace WpfChatClient
             MessageList.Children.Add(infoBox);
         }
 
+        private void AddOnlineUserToList(List<string> users)
+        {
+            OnlineUsersList.Children.Clear();
+
+            foreach (string username in users)
+            {
+                Border userBox = GenerateOnlineUserCard(username);
+                OnlineUsersList.Children.Add(userBox);
+            }            
+        }
+
         private Border GenerateMessageBox(SolidColorBrush color, HorizontalAlignment alignment, string message)
         {
             Border border = new Border();
@@ -93,6 +107,62 @@ namespace WpfChatClient
             textBlock.HorizontalAlignment = HorizontalAlignment.Center;
 
             return textBlock;
+        }
+
+        private Border GenerateOnlineUserCard(string username)
+        {
+            Border border = new Border();
+            border.Padding = new Thickness(20, 5, 20, 5);
+
+            Grid grid = new Grid();
+            ColumnDefinition column = new ColumnDefinition();
+            column.Width = GridLength.Auto;
+            ColumnDefinition column2 = new ColumnDefinition();
+            column2.Width = new GridLength(1, GridUnitType.Star);
+            grid.ColumnDefinitions.Add(column);
+            grid.ColumnDefinitions.Add(column2);
+
+            Ellipse ellipse = new Ellipse();
+            ellipse.SetValue(Grid.ColumnProperty, 0);
+            ellipse.Height = 60;
+            ellipse.Width = 60;
+            ellipse.HorizontalAlignment = HorizontalAlignment.Left;
+            ImageBrush imageBrush = new ImageBrush();
+            imageBrush.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/avatar1.jpg"));
+            ellipse.Fill = imageBrush;
+
+            grid.Children.Add(ellipse);
+
+            Grid grid1 = new Grid();
+            grid1.SetValue(Grid.ColumnProperty, 1);
+            grid1.Margin = new Thickness(5, 0, 5, 0);
+            RowDefinition row = new RowDefinition();
+            row.Height = new GridLength(1, GridUnitType.Star);
+            RowDefinition row1 = new RowDefinition();
+            row1.Height = new GridLength(1, GridUnitType.Star);
+            grid1.RowDefinitions.Add(row);
+            grid1.RowDefinitions.Add(row1);
+
+            Label label = new Label();
+            label.SetValue(Grid.RowProperty, 0);
+            label.Content = username;
+            label.VerticalAlignment = VerticalAlignment.Bottom;
+            label.Foreground = ColorHelper.GetColor("#fff");
+
+            Label label2 = new Label();
+            label2.SetValue(Grid.RowProperty, 1);
+            label2.Content = "Description";
+            label2.VerticalAlignment = VerticalAlignment.Top;
+            label2.Foreground = ColorHelper.GetColor("#fff");
+
+            grid1.Children.Add(label);
+            grid1.Children.Add(label2);
+
+            grid.Children.Add(grid1);
+
+            border.Child = grid;
+
+            return border;
         }
 
         private void input_message_KeyDown(object sender, KeyEventArgs e)
