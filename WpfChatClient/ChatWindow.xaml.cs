@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
@@ -25,7 +26,7 @@ namespace WpfChatClient
 
             Task.Run(() =>
             {
-                _client.Listen(AddServerMessageToList, AddServerInfoMessageToList, AddOnlineUserToList);
+                _client.Listen(AddServerMessageToList, AddServerInfoMessageToList, AddOnlineUserToList, AddServerFileToMessageList);
             });
         }
 
@@ -73,7 +74,18 @@ namespace WpfChatClient
             {
                 Border userBox = GenerateOnlineUserCard(username);
                 OnlineUsersList.Children.Add(userBox);
-            }            
+            }
+        }
+
+        private void AddUserFileToMessageList(string fileName)
+        {
+            Border fileBox = GenerateFileBox(ColorHelper.GetColor("#19a3ff"), HorizontalAlignment.Right, fileName);
+            MessageList.Children.Add(fileBox);
+        }
+        private void AddServerFileToMessageList(string fileName)
+        {
+            Border fileBox = GenerateFileBox(ColorHelper.GetColor("#303030"), HorizontalAlignment.Left, fileName);
+            MessageList.Children.Add(fileBox);
         }
 
         private Border GenerateMessageBox(SolidColorBrush color, HorizontalAlignment alignment, string message)
@@ -165,6 +177,56 @@ namespace WpfChatClient
             return border;
         }
 
+        private Border GenerateFileBox(SolidColorBrush color, HorizontalAlignment alignment, string fileName)
+        {
+            Border border = new Border();
+            border.Margin = new Thickness(0, 0, 0, 2);
+            border.Background = color;
+            border.CornerRadius = new CornerRadius(4);
+            border.HorizontalAlignment = alignment;
+            border.Padding = new Thickness(8);
+            border.Cursor = Cursors.Hand;
+            border.AddHandler(MouseLeftButtonUpEvent, new RoutedEventHandler(FileBox_Click), true);
+
+            StackPanel stackPanel = new StackPanel();
+            stackPanel.Orientation = Orientation.Horizontal;
+
+            Image image = new Image();
+            image.Source = new BitmapImage(new Uri("pack://application:,,,/images/download.png"));
+            image.Height = 25;
+            image.Width = 25;
+            Label label = new Label();
+            label.Content = fileName;
+            label.Foreground = ColorHelper.GetColor("#fff");
+
+            stackPanel.Children.Add(image);
+            stackPanel.Children.Add(label);
+
+            border.Child = stackPanel;
+
+            return border;
+        }
+
+        private async void FileBox_Click(object sender, RoutedEventArgs e)
+        {
+            await _client.RequestFile(GetFileName(sender));
+        }
+
+        private string GetFileName(object sender)
+        {
+            StackPanel stackPanel = (StackPanel)(sender as Border).Child;
+            string childname = "";
+            foreach (UIElement element in stackPanel.Children)
+            {
+                if (element is Label)
+                {
+                    childname = (element as Label).Content.ToString();
+                }
+            }
+
+            return childname;
+        }
+
         private void input_message_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
@@ -188,6 +250,17 @@ namespace WpfChatClient
             _client.Close();
 
             WindowHelper.ChangeWindow(this, new MainWindow());
+        }
+
+        private async void Btn_SendFile_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog();
+
+            if (fileDialog.ShowDialog() == true)
+            {
+                await _client.SendFile(fileDialog.SafeFileName, fileDialog.FileName);
+                AddUserFileToMessageList(fileDialog.SafeFileName);
+            }
         }
     }
 }
