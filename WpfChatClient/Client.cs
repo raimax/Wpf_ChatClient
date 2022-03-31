@@ -17,7 +17,17 @@ namespace WpfChatClient
 
         public async Task Connect(string ipAddress, int port)
         {
-            await _client.ConnectAsync(ipAddress, port);
+            IAsyncResult result = _client.BeginConnect(ipAddress, port, null, null);
+
+            bool success = result.AsyncWaitHandle.WaitOne(TimeSpan.FromSeconds(2));
+
+            if (!success)
+            {
+                throw new Exception("Failed to connect to server");
+            }
+
+            _client.EndConnect(result);
+
             _stream = _client.GetStream();
             await SendMessage(Username);
         }
@@ -71,7 +81,7 @@ namespace WpfChatClient
         }
 
         public void Listen(
-            Action<string> onMessegedReveived,
+            Action<string, string> onMessegedReveived,
             Action<string> onInfoRecveived,
             Action<List<string>> onUsersListReceived,
             Action<string> onFileNameReceived)
@@ -90,7 +100,7 @@ namespace WpfChatClient
                     {
                         Application.Current.Dispatcher.Invoke(delegate
                         {
-                            onMessegedReveived(message.Data[0]);
+                            onMessegedReveived(message.Data[0], message.Data[1]);
                         });
                     }
                     else if (message.Type == Message.MessageType.UserList)

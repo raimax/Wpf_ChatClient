@@ -54,9 +54,9 @@ namespace WpfChatClient
             MessageList.Children.Add(messageBox);
         }
 
-        private void AddServerMessageToList(string message)
+        private void AddServerMessageToList(string message, string username)
         {
-            Border messageBox = GenerateMessageBox(ColorHelper.GetColor("#303030"), HorizontalAlignment.Left, message);
+            StackPanel messageBox = GenerateServerMessageBox(ColorHelper.GetColor("#303030"), HorizontalAlignment.Left, username, message);
             MessageList.Children.Add(messageBox);
         }
 
@@ -108,6 +108,37 @@ namespace WpfChatClient
             return border;
         }
 
+        private StackPanel GenerateServerMessageBox(SolidColorBrush color, HorizontalAlignment alignment, string username, string message)
+        {
+            StackPanel stackPanel = new StackPanel();
+
+            Border border = new Border();
+            border.Margin = new Thickness(0, 0, 0, 2);
+            border.Background = color;
+            border.CornerRadius = new CornerRadius(15);
+            border.HorizontalAlignment = alignment;
+
+            Label label = new Label();
+            label.Content = username;
+            label.FontSize = 11;
+            label.Foreground = ColorHelper.GetColor("#ddd");
+            label.Padding = new Thickness(8, 0, 0, 0);
+
+            TextBlock textBlock = new TextBlock();
+            textBlock.Padding = new Thickness(8);
+            textBlock.FontSize = 16;
+            textBlock.Text = message;
+            textBlock.TextWrapping = TextWrapping.Wrap;
+            textBlock.Foreground = ColorHelper.GetColor("#fff");
+
+            border.Child = textBlock;
+
+            stackPanel.Children.Add(label);
+            stackPanel.Children.Add(border);
+
+            return stackPanel;
+        }
+
         private TextBlock GenerateInfoBox(string message)
         {
             TextBlock textBlock = new TextBlock();
@@ -136,8 +167,8 @@ namespace WpfChatClient
 
             Ellipse ellipse = new Ellipse();
             ellipse.SetValue(Grid.ColumnProperty, 0);
-            ellipse.Height = 60;
-            ellipse.Width = 60;
+            ellipse.Height = 50;
+            ellipse.Width = 50;
             ellipse.HorizontalAlignment = HorizontalAlignment.Left;
             ImageBrush imageBrush = new ImageBrush();
             imageBrush.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/avatar1.jpg"));
@@ -150,25 +181,26 @@ namespace WpfChatClient
             grid1.Margin = new Thickness(5, 0, 5, 0);
             RowDefinition row = new RowDefinition();
             row.Height = new GridLength(1, GridUnitType.Star);
-            RowDefinition row1 = new RowDefinition();
-            row1.Height = new GridLength(1, GridUnitType.Star);
+            //RowDefinition row1 = new RowDefinition();
+            //row1.Height = new GridLength(1, GridUnitType.Star);
             grid1.RowDefinitions.Add(row);
-            grid1.RowDefinitions.Add(row1);
+            //grid1.RowDefinitions.Add(row1);
 
             Label label = new Label();
             label.SetValue(Grid.RowProperty, 0);
             label.Content = username;
-            label.VerticalAlignment = VerticalAlignment.Bottom;
+            label.FontSize = 14;
+            label.VerticalAlignment = VerticalAlignment.Center;
             label.Foreground = ColorHelper.GetColor("#fff");
 
-            Label label2 = new Label();
-            label2.SetValue(Grid.RowProperty, 1);
-            label2.Content = "Description";
-            label2.VerticalAlignment = VerticalAlignment.Top;
-            label2.Foreground = ColorHelper.GetColor("#fff");
+            //Label label2 = new Label();
+            //label2.SetValue(Grid.RowProperty, 1);
+            //label2.Content = "Description";
+            //label2.VerticalAlignment = VerticalAlignment.Top;
+            //label2.Foreground = ColorHelper.GetColor("#fff");
 
             grid1.Children.Add(label);
-            grid1.Children.Add(label2);
+            //grid1.Children.Add(label2);
 
             grid.Children.Add(grid1);
 
@@ -249,7 +281,10 @@ namespace WpfChatClient
         {
             _client.Close();
 
-            WindowHelper.ChangeWindow(this, new MainWindow());
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Input_Username.Text = _client.Username;
+
+            WindowHelper.ChangeWindow(this, mainWindow);
         }
 
         private async void Btn_SendFile_Click(object sender, RoutedEventArgs e)

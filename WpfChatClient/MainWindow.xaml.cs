@@ -15,6 +15,23 @@ namespace WpfChatClient
 
         private async void btn_connect_Click(object sender, RoutedEventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(Input_IpAddress.Text))
+            {
+                MessageBox.Show("Ip address is required");
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(Input_Port.Text))
+            {
+                MessageBox.Show("Port is required");
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(Input_Username.Text))
+            {
+                MessageBox.Show("Username is required");
+                return;
+            }
+
+
             btn_connect.IsEnabled = false;
             btn_connect.Content = "Connecting...";
             btn_connect.Foreground = SystemColors.GrayTextBrush;
