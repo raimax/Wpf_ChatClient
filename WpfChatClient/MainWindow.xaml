@@ -7,16 +7,16 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="400" WindowStartupLocation="CenterScreen"
         Closed="Window_Closed">
-    <Grid>
+    <Grid Background="#FF0A0515">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.ColumnSpan="2" Width="250" VerticalAlignment="Center">
-            <TextBlock Text="Connect to chat server" TextAlignment="Center" FontWeight="Normal" FontSize="22" Margin="0,0,0,20" />
-            <TextBox x:Name="Input_IpAddress" KeyDown="Input_KeyDown" Margin="0,0,0,10" VerticalContentAlignment="Center" Height="30" Text="127.0.0.1" TextAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
-            <TextBox x:Name="Input_Port" KeyDown="Input_KeyDown" Margin="0,0,0,10" VerticalContentAlignment="Center" Height="30" Text="6666" TextAlignment="Center" />
-            <TextBox x:Name="Input_Username" KeyDown="Input_KeyDown" Margin="0,0,0,20" VerticalContentAlignment="Center" Height="30" Text="user1" TextAlignment="Center" />
+            <TextBlock Text="Connect to chat server" TextAlignment="Center" FontWeight="Normal" FontSize="22" Margin="0,0,0,20" Foreground="#fff" />
+            <TextBox x:Name="Input_IpAddress" KeyDown="Input_KeyDown" Margin="0,0,0,10" VerticalContentAlignment="Center" Height="30" Text="127.0.0.1" TextAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF303030" Foreground="#fff" />
+            <TextBox x:Name="Input_Port" KeyDown="Input_KeyDown" Margin="0,0,0,10" VerticalContentAlignment="Center" Height="30" Text="6666" TextAlignment="Center" Background="#FF303030" Foreground="#fff" />
+            <TextBox x:Name="Input_Username" KeyDown="Input_KeyDown" Margin="0,0,0,20" VerticalContentAlignment="Center" Height="30" Text="user1" TextAlignment="Center" Background="#FF303030" Foreground="#fff" />
             <Button x:Name="btn_connect" Content="Connect" BorderThickness="0" HorizontalAlignment="Left" VerticalAlignment="Top" Click="btn_connect_Click" Width="250" Height="30" Background="#FF006ACC" Cursor="Hand" Foreground="White" FontWeight="Bold" />
         </StackPanel>
 
